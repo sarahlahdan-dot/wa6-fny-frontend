@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import ProfileSetup from './pages/ProfileSetup';
 import Profile from './pages/Profile';
-import Jobs from './pages/Jobs';
+import Jobs from './pages/Job';
 import JobDetail from './pages/JobDetails';
 import JobForm from './pages/JobForm';
 import Applications from './pages/Applications';
