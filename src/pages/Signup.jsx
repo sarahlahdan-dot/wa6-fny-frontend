@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 
 function Signup() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
+    email: '',
     password: '',
-  });
-  const [errorMessage, setErrorMessage] = useState('');
+    role: 'seeker'
+  })
 
-  const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -28,35 +30,30 @@ function Signup() {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>Create an Account</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
+        <label htmlFor="username">Username:</label>
+        <input name='username' value={formData.username} onChange={handleChange} />
+
+        <label htmlFor="email">Email:</label>
+        <input name='email' value={formData.email} onChange={handleChange} />
+
+        <label htmlFor="password">Password:</label>
+        <input name='password' value={formData.password} onChange={handleChange} />
+
+        <label>I am a:</label>
+        <select name="role" value={formData.role} onChange={handleChange}>
+          <option value="seeker">Job Seeker</option>
+          <option value="employer">Employer</option>
+        </select>
+
+        <button type='submit'>Sign Up</button>
+
+         
       </form>
-      {errorMessage && <p style={{ color: 'red' }} role="alert">{errorMessage}</p>}
-    </div>
-  );
+      </div>
+     
+  )
 }
 
 export default Signup;
