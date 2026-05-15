@@ -83,6 +83,40 @@ function JobForm() {
     <div>
       <h1>{id ? 'Edit The Job' : 'Post a New Job'}</h1>
       <form onSubmit={handleSubmit}>
+
+        <label htmlFor="title">Job Title:</label>
+        <input name='title' value={formData.title} onChange={handleChange} />
+
+        <label htmlFor="company">Company:</label>
+        <input name='company' value={formData.company} onChange={handleChange} />
+
+        <label htmlFor="description">Description</label>
+        <textarea name="description" value={formData.description} onChange={handleChange}/>
+
+        <label htmlFor="location">Location</label>
+        <input name='location' value={formData.location} onChange={handleChange} />
+
+        <label htmlFor="jobType">Job Type:</label>
+        <select name="jobType" value={formData.jobType} onChange={handleChange}>
+          <option value="full-time">Full-Time</option>
+          <option value="part-time">Part-Time</option>
+          <option value="internship">Internship</option>
+          <option value="remote">Remote</option>
+        </select>
+
+        <label>Skills Required:</label>
+        <skillPicker selectedSkills={formData.skillsRequired} onChange={handleChange}/>
+        {/* only show when editing — lets employer close/reopen the job */}
+        {id && (
+          <>
+            <label htmlFor='isOpen'>Job is open:</label>
+            <input type='checkbox' name='isOpen' checked={formData.isOpen} onChange={handleChange} />
+          </>
+        )}
+
+      <button type='submit'>{id ? 'save changes' : 'Post Job'}</button>
+      <button type='button' onClick={()=> navigate('/dashboard')}>Cancel</button>
+
         
       </form>
       
