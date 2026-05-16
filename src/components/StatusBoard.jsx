@@ -1,17 +1,11 @@
-import { Link } from 'react-router'
-import Applications from '../pages/Applications'
-
 const COLUMNS = ['Applied','Reviewing','Accepted','Rejected']
 
 function StatusBoard({ applications, onWithdraw }) {
-//GATHER APPLICATION BY STATUS
+  // GATHER APPLICATION BY STATUS
 
   function getByStatus(status) {
-    return Applications.filter((app) => {
-        return app.status === status
-    })
-
-}
+    return applications.filter((app) => app.status === status)
+  }
   return (
     <div className='status-board'>
         {COLUMNS.map(status => (

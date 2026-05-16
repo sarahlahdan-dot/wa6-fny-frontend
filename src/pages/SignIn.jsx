@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn({ setUser }) {
   const [formData, setFormData] = useState({
@@ -17,6 +17,11 @@ function SignIn({ setUser }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!import.meta.env.VITE_BACKEND_URL) {
+      setErrorMessage('Missing backend URL: set VITE_BACKEND_URL in .env')
+      return
+    }
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`, formData);

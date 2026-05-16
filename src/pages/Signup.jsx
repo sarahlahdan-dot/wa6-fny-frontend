@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const navigate = useNavigate()
@@ -10,8 +10,7 @@ function Signup() {
     password: '',
     role: 'seeker'
   })
-
-
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -20,36 +19,62 @@ function Signup() {
   async function handleSubmit(event){
     event.preventDefault()
 
+    if (!import.meta.env.VITE_BACKEND_URL) {
+      setErrorMessage('Missing backend URL: set VITE_BACKEND_URL in .env')
+      return
+    }
+
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-up`, formData);
       navigate('/sign-in');
     } catch (err) {
-      setErrorMessage(err.response?.data?.err || 'An error occurred during sign up');
+      setErrorMessage(err.response?.data?.err || 'Signup failed. Check your backend connection.')
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div>
       <h1>Create an Account</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
-        <input name='username' value={formData.username} onChange={handleChange} />
+        <input
+          id="username"
+          name="username"
+          type="text"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
 
         <label htmlFor="email">Email:</label>
-        <input name='email' value={formData.email} onChange={handleChange} />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
 
         <label htmlFor="password">Password:</label>
-        <input name='password' value={formData.password} onChange={handleChange} />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
 
-        <label>I am a:</label>
-        <select name="role" value={formData.role} onChange={handleChange}>
+        <label htmlFor="role">I am a:</label>
+        <select id="role" name="role" value={formData.role} onChange={handleChange}>
           <option value="seeker">Job Seeker</option>
           <option value="employer">Employer</option>
         </select>
 
         <button type='submit'>Sign Up</button>
-
-         
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </form>
       </div>
      

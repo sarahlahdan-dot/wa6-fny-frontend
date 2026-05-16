@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router'
-import skillPicker from '../components/SkillPicker'
+import { useNavigate, useParams } from 'react-router-dom'
+import SkillPicker from '../components/SkillPicker'
 
 //  THIS IS FOR HANDLING TWO PATH /:ID/EDIT AND /JOBS/NEW 
 function JobForm() {
@@ -51,10 +51,13 @@ function JobForm() {
     if (id) getJob()},[id])
   
   function handleChange(event){
-    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
-    setFormData({...formData, skillsRequired: newSkills })
-  }    
-  
+    const { name, type, value, checked } = event.target
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    })
+  }
+
   function handleSkillsChange(newSkills){
     setFormData({...formData, skillsRequired: newSkills})
   }
@@ -109,7 +112,7 @@ function JobForm() {
         </select>
 
         <label>Skills Required:</label>
-        <skillPicker selectedSkills={formData.skillsRequired} onChange={handleChange}/>
+        <SkillPicker selectedSkills={formData.skillsRequired} onChange={handleSkillsChange}/>
         {/* only show when editing — lets employer close/reopen the job */}
         {id && (
           <>
