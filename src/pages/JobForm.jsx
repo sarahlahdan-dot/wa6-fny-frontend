@@ -19,6 +19,10 @@ function JobForm() {
     isOpen: true
   })
 
+  //gets the logged-in user’s token sends it to the backend, 
+  // asks for a specific job using its ID. 
+  // The backend checks the token and returns the job data if the user is authorized.
+
   async function getJob(){
     try{
 
