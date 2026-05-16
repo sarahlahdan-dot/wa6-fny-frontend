@@ -1,13 +1,12 @@
-import { Link, useNavigate} from 'react-router'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar({ user, setUser }) {
-  
+  const navigate = useNavigate()
 
   function logOut(){
     localStorage.removeItem('token')
     setUser(null)
     navigate('/')
-    
   }
 
   return (
