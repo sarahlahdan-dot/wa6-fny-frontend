@@ -1,6 +1,6 @@
 const COLUMNS = ['Applied','Reviewing','Accepted','Rejected']
 
-function StatusBoard({ applications, onWithdraw }) {
+function StatusBoard({ applications = [], onWithdraw }) {
   // GATHER APPLICATION BY STATUS
 
   function getByStatus(status) {

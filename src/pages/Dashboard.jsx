@@ -12,7 +12,7 @@ function Dashboard({ user }) {
     try{
       const token = localStorage.getItem('token')
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/jobs`,
+        `${import.meta.env.VITE_BACKEND_URL}/jobs`,
         { headers: {Authorization: `Bearer ${token}` } }
       )
       // this filters only this employer's jobs
@@ -32,7 +32,7 @@ function Dashboard({ user }) {
     try{
       const token = localStorage.getItem('token')
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${jobId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/jobs/${jobId}`,
         { headers: {Authorization: `Bearer ${token}` } }
       )
       setJobs(jobs.filter(job => job._id !== jobId))
