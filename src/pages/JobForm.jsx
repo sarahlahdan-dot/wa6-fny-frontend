@@ -28,7 +28,7 @@ function JobForm() {
 
       const token = localStorage.getItem('token')
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/jobs/${id}`,
         { headers: {Authorization: `Bearer ${token}` } }
       )
       setFormData({
@@ -68,7 +68,7 @@ function JobForm() {
       const token = localStorage.getItem('token')
       if (id) {
         await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`,formData,
+          `${import.meta.env.VITE_BACKEND_URL}/jobs/${id}`,formData,
           { headers: { Authorization: `Bearer ${token}`}}
         )
 

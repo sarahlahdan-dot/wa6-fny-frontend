@@ -19,7 +19,7 @@ function Applicants() {
     try{
       const token = localStorage.getItem('token')
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}/applicants`,
+        `${import.meta.env.VITE_BACKEND_URL}/jobs/${id}/applicants`,
         { headers: {Authorization: `Bearer ${token}` } }
       )
       setApplicants(res.data)
@@ -39,7 +39,7 @@ function Applicants() {
     try{
       const token = localStorage.getItem('token')
       await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/applications/${applicantionId}/status`,
+        `${import.meta.env.VITE_BACKEND_URL}/applications/${applicantionId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       )
