@@ -50,12 +50,9 @@ function JobForm() {
   useEffect(()=>{
     if (id) getJob()},[id])
   
-  function handleChange(event){
-    const { name, type, value, checked } = event.target
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    })
+  function handleChange(event) {
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+    setFormData({ ...formData, [event.target.name]: value })
   }
 
   function handleSkillsChange(newSkills){
