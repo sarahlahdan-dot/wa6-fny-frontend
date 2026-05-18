@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 function SignIn({ setUser }) {
   const [formData, setFormData] = useState({
@@ -30,9 +30,19 @@ function SignIn({ setUser }) {
       const userInfo = JSON.parse(atob(token.split('.')[1])).payload;
       setUser(userInfo);
       localStorage.setItem('token', token);
-
-      navigate('/dashboard');
-    } catch (err) {
+      
+      if (!userInfo.profileComplete) {
+        navigate('/profile/setup')
+      } 
+      else if (userInfo.role === 'employer') {
+        navigate('/dashboard')
+      } 
+      else {
+        navigate('/jobs')
+      }
+      
+    } 
+    catch (err) {
       setErrorMessage(err.response?.data?.err || 'An error occurred during sign in');
     }
   };

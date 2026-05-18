@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import { useNavigate, Link } from "react-router-dom"
-
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate, Link } from 'react-router'
 
 //  THE DASHBOARD IS FOR THE EMPLOYERS ONLY!
 function Dashboard({ user }) {
@@ -16,7 +15,7 @@ function Dashboard({ user }) {
         { headers: {Authorization: `Bearer ${token}` } }
       )
       // this filters only this employer's jobs
-      const myJobs = res.data.filter(job => job.postedBy._id === user._id)
+      const myJobs = res.data.jobs.filter(job => job.postedBy._id.toString() === user._id.toString())
       setJobs(myJobs)
     }
     catch(err){
@@ -44,7 +43,7 @@ function Dashboard({ user }) {
   return (
     <div>
         <h1>My Job Postings</h1>
-        <button onClick={() => navigate('/jobs/new')}>+ Post a new Job</button>
+        <button onClick={() => navigate('/jobs/new')}>Post a new Job</button>
         {jobs.map(job => (
           <div key={job._id} className='dashboard-job-row'>
             <h3>{job.title}</h3>
@@ -53,7 +52,12 @@ function Dashboard({ user }) {
 
             <Link to={`/jobs/${job._id}/applicants`}>View Applicants</Link>
             <Link to={`/jobs/${job._id}/edit`}>Edit</Link>
-            <button onClick={()=>handleDelete(job._id)}>Delete</button>
+            <button onClick={() => { 
+              const confirmed = window.confirm('Delete this job posting?')
+              if (confirmed) {
+                handleDelete(job._id)
+              }
+            }}>Delete</button>
 
           </div>
         ))}

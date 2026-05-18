@@ -3,14 +3,14 @@ import axios from 'axios'
 import { useNavigate } from 'react-router'
 import SkillPicker from '../components/SkillPicker'
 
-function ProfileSetup({ user, setUser }) {
+function ProfileSetup({ user }) {
 
   const navigate = useNavigate()
 
    const [formData, setFormData] = useState({
     bio: '',
     location: '',
-    companyName: '',
+    company: '',
     skills: []
   })
   
@@ -42,21 +42,22 @@ function ProfileSetup({ user, setUser }) {
       <form onSubmit={handleSubmit}>
 
         <label htmlFor='bio'>Bio:</label>
-        <input name='bio' value={formData.bio} onChange={handleChange} />
+        <textarea name='bio' value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..."/>
 
         <label htmlFor='location'>Location:</label>
         <input name='location' value={formData.location} onChange={handleChange} />
 
         {user.role === 'employer' && (
           <>
-            <label htmlFor='companyName'>Company Name:</label>
-            <input name='companyName' value={formData.companyName} onChange={handleChange} />
+            <label htmlFor='company'>Company Name:</label>
+            <input name='company' value={formData.company} onChange={handleChange} />
           </>
         )}
 
         {user.role === 'seeker' && (
           <>
             <label>Your Skills:</label>
+            <p>Select the skills you are confident in.</p>
             <SkillPicker selectedSkills={formData.skills} onChange={handleSkillsChange} />
           </>
         )}

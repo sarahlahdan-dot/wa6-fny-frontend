@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import SkillPicker from '../components/SkillPicker'
 
 //  THIS IS FOR HANDLING TWO PATH /:ID/EDIT AND /JOBS/NEW 
@@ -71,7 +71,7 @@ function JobForm() {
 
       } else {
         await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/api/jobs`,
+          `${import.meta.env.VITE_BACKEND_URL}/jobs`,
           formData,
           { headers: { Authorization: `Bearer ${token}`}}
         )

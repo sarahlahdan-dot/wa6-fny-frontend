@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 
 function Homepage({user}) {
   const navigate = useNavigate()
@@ -6,8 +6,8 @@ function Homepage({user}) {
   return (
     <div className="homepage">
       <h1>وظفني · Wa6'fny</h1>
-      <p className="tagline">Find jobs that actually fit you - based on your skills, not your luck.</p>
-
+      <p className="tagline">  Bahrain 's AI-powered platform matching job seekers with the right opportunities.</p>
+      <p className='homepage-description'> Built specifically for Bahrain 's job market to help seekers and employers connect more efficiently.</p>
       {user ? (
         <>
           {user.role === 'seeker' && (

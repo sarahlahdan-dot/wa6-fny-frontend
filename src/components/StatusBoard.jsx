@@ -16,7 +16,7 @@ function StatusBoard({ applications = [], onWithdraw }) {
                 <div key={app._id} className='status-card'>
                     <h4>{app.job.title}</h4>
                     <p>{app.job.company}</p>
-                    <p>{app.job.location} .{app.job.jobType}</p>
+                    <p>{app.job.location} • {app.job.jobType}</p>
                     <span className='match-score-small'>{app.matchScore}% match</span>
 
                     {/* only show withdraw on Applied — no point withdrawing from Accepted/Rejected */}

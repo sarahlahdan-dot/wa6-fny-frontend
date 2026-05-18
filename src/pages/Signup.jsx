@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router'
 
 function Signup() {
   const navigate = useNavigate()
@@ -19,23 +19,21 @@ function Signup() {
   async function handleSubmit(event){
     event.preventDefault()
 
-    if (!import.meta.env.VITE_BACKEND_URL) {
-      setErrorMessage('Missing backend URL: set VITE_BACKEND_URL in .env')
-      return
-    }
-
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-up`, formData);
       navigate('/sign-in');
     } catch (err) {
-      setErrorMessage(err.response?.data?.err || 'Signup failed. Check your backend connection.')
       console.log(err)
+      setErrorMessage(
+        err.response?.data?.err || 'Something went wrong'
+      )
     }
   }
 
   return (
     <div>
-      <h1>Create an Account</h1>
+      <h1>Join Wa6'fny</h1>
+      <p> Bahrain's AI-powered job matching platform</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input

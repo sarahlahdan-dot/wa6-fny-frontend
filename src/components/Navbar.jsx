@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router'
 
 function Navbar({ user, setUser }) {
   const navigate = useNavigate()
