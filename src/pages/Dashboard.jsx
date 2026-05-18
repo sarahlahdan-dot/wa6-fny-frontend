@@ -50,7 +50,7 @@ function Dashboard({ user }) {
             <p>{job.company} . {job.location} . {job.jobType}</p>
             <p>{job.isOpen ? 'open' : 'closed'}</p>
             <div>
-              // The skills required section is conditionally rendered. If there are skills required, it maps over them and displays each skill in a span with the class 'skill-tag'. If there are no specific skills required, it displays a message saying so.
+              {/* This section conditionally renders the required skills. If there are skills required, it maps over them and displays each skill in a span with the class 'skill-tag'. If there are no specific skills required, it displays a message saying so. */}
               <strong>Skills Required:</strong>
               {job.skillsRequired?.length > 0 ? (
                 <div>
