@@ -110,6 +110,17 @@ function JobForm() {
 
         <label>Skills Required:</label>
         <SkillPicker selectedSkills={formData.skillsRequired} onChange={handleSkillsChange}/>
+        <div className='selected-skills-row'>
+
+          {/*This section conditionally renders the selected skills. If there are skills in formData.skillsRequired, it maps over them and displays each skill in a span with the classes 'skill-tag' and 'selected'. If there are no skills selected, it displays a message saying "No skills selected yet." */}
+          {formData.skillsRequired.length > 0 ? (
+            formData.skillsRequired.map(skill => (
+              <span key={skill} className='skill-tag selected'>{skill}</span>
+            ))
+          ) : (
+            <p>No skills selected yet.</p>
+          )}
+        </div>
         {/* only show when editing — lets employer close/reopen the job */}
         {id && (
           <>
