@@ -8,8 +8,9 @@ function Job() {
   async function getAllJobs() {
     try {
       const token = localStorage.getItem('token')
-      jobs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/jobs`, { headers: { Authorization: `Bearer ${token}` } })
-      setJobs(jobs.data)
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/jobs`, { headers: { Authorization: `Bearer ${token}` } })
+      console.log(res.data)
+      setJobs(res.data.jobs)
     } 
     catch (err) {
       console.log(err)
@@ -22,7 +23,7 @@ function Job() {
 
   return (
     <div>
-      <h1>Jobs For You</h1>
+      <h1>Your Best Job Matches</h1>
       {jobs.map(job => (
         <JobCard key={job._id} job={job} />
       ))}

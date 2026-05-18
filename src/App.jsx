@@ -37,15 +37,15 @@ function App() {
         <Route path="/" element={<Homepage user={user} />} />
         <Route path="/sign-up" element={!user ? <SignUp /> : <Navigate to='/'/>} />
         <Route path="/sign-in" element={!user ? <SignIn setUser={setUser} /> : <Navigate to='/'/>} />
-        <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to='/sign-in'/>} />
+        <Route path="/dashboard" element={user && user.role === 'employer'? <Dashboard user={user} /> : <Navigate to='/sign-in'/>} />
         <Route path="/profile/setup" element={user ? <ProfileSetup user={user} /> : <Navigate to='/sign-in'/>} />
         <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to='/sign-in'/>} />
         <Route path="/jobs" element={user ? <Jobs /> : <Navigate to='/sign-in'/>} />
-        <Route path="/jobs/new" element={user ? <JobForm /> : <Navigate to='/sign-in'/>} />
+        <Route path="/jobs/new" element={user && user.role === 'employer' ? <JobForm /> : <Navigate to='/sign-in'/>} />
         <Route path="/jobs/:id" element={user ? <JobDetail user={user} /> : <Navigate to='/sign-in'/>} />
         <Route path="/jobs/:id/edit" element={user ? <JobForm /> : <Navigate to='/sign-in'/>} />
-        <Route path="/jobs/:id/applicants" element={user ? <Applicants /> : <Navigate to='/sign-in'/>} />
-        <Route path="/applications" element={user ? <Applications /> : <Navigate to='/sign-in'/>} />
+        <Route path="/jobs/:id/applicants" element={user && user.role === 'employer'? <Applicants /> : <Navigate to='/sign-in'/>} />
+        <Route path="/applications" element={user && user.role === 'seeker' ? <Applications /> : <Navigate to='/sign-in'/>} />
       </Routes>
     </div>
   );

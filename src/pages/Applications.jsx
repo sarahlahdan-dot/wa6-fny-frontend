@@ -3,16 +3,16 @@ import axios from 'axios'
 import StatusBoard from '../components/StatusBoard'
 
 function Applications() {
-  const [applications, setApplications] = useEffect([])
+  const [applications, setApplications] = useState([])
 
   async function getMyApplications(){
       try{
         const token = localStorage.getItem('token')
-        const res = await axios.get(
+        const myApplications = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/applications/mine`,
-          { headers: { Authorization: `Bearer${token}` } }
+          { headers: { Authorization: `Bearer ${token}` } }
         )
-        setApplications(res.data)
+        setApplications(myApplications.data)
       }
       catch(err){
         console.log(err)
@@ -26,12 +26,15 @@ function Applications() {
     async function handleWithDraw(applicationId){
       try{
         const token = localStorage.getItem('token')
+        const confirmed = window.confirm('Withdraw this application?')
+        if (!confirmed) return
+        
         await axios.delete(
             `${import.meta.env.VITE_BACKEND_URL}/applications/${applicationId}`,
             { headers: { Authorization: `Bearer ${token}` } }
           )
 
-          setApplication(applications.filter(app => app._id !== applicationId))
+          setApplications(applications.filter(app => app._id !== applicationId))
         
       }
       catch(err){
@@ -43,7 +46,7 @@ function Applications() {
     <div>
       <h1>My Applications</h1>
       {applications.length === 0
-        ? <p>you haven't applied to any jobs yet.</p>
+        ? <p>You haven't applied to any jobs yet.</p>
         : <StatusBoard applications={applications} onWithdraw={handleWithDraw} />
          }
       

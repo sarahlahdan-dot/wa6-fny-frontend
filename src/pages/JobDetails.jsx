@@ -13,7 +13,7 @@ function JobDetails({ user }) {
   async function getJob() {
     try {
       const token = localStorage.getItem('token')
-      const oneJob = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+      const oneJob = await axios.get( `${import.meta.env.VITE_BACKEND_URL}/jobs/${id}`, { headers: { Authorization: `Bearer ${token}` } })
       
       setJob(oneJob.data)
     } 
@@ -48,26 +48,27 @@ function JobDetails({ user }) {
       <p>{job.company} · {job.location} · {job.jobType}</p>
       <p>{job.description}</p>
 
-      <h3>Your Match: {job.matchScore}%</h3>
-
-      <div>
-        <h4>Skills you have:</h4>
-        {job.matchedSkills.map(skill => (
-          <span key={skill} className='skill-tag matched'>{skill}</span>
-        ))}
-      </div>
-
-      <div>
-        <h4>Skills you're missing:</h4>
-        {job.missingSkills.length > 0
-          ? job.missingSkills.map(skill => (
-              <span key={skill} className='skill-tag missing'>{skill}</span>
-            ))
-          : <p>None — you have all the required skills!</p>
-        }
-      </div>
-
-      
+      {job.matchScore !== undefined && (
+        <>
+          <h3>Your Match: {job.matchScore}%</h3>
+          <div>
+            <h4>Skills you have:</h4>
+            {job.matchedSkills?.map(skill => (
+              <span key={skill} className='skill-tag matched'>{skill}</span>
+            ))}
+          </div>
+          <div>
+            <h4>Skills you're missing:</h4>
+            {job.missingSkills?.length > 0
+              ? job.missingSkills.map(skill => (
+                  <span key={skill} className='skill-tag missing'>{skill}</span>
+                ))
+              : <p>None — you have all the required skills!</p>
+            }
+          </div>
+        </>
+      )}
+   
       {user.role === 'seeker' && (
         job.alreadyApplied ? (
           <p>You already applied to this job.</p>

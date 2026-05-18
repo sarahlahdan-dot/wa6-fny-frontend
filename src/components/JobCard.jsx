@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 function JobCard({job}) {
 
@@ -16,21 +15,21 @@ function JobCard({job}) {
                 <p>{job.company} . {job.location}</p>
                 <span className='job-type-tag'>{job.jobType}</span>
             </div>
-            <div className={`match-score${matchColor(job.matchScore)}`}></div>
-            <span>{job.matchScore}%</span>
-            <small>match</small>
+            <div className={`match-score ${matchColor(job.matchScore)}`}>
+                <span>{job.matchScore}%</span>
+                <small>match</small>
+            </div>
         </div>
         <div className='skills-row'>
-            {job.matchedSkills.map(skill =>(
+            {job.matchedSkills?.map(skill =>(
                 <span key={skill} className='skill-tag matched'>{skill}</span>
             ))}
-            {job.missingSkills.map(skill => (
+            {job.missingSkills?.map(skill => (
                 <span key={skill} className='skill-tag missing'>{skill}</span>
             ))}
-
-            <Link to={`/jobs/${job._id}`}>View this job and apply!</Link>
-
         </div>
+        <Link to={`/jobs/${job._id}`}>View this job and apply!</Link>
+
     </div>
      
   )

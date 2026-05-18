@@ -1,13 +1,10 @@
-import { useState, useEffect }from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
-
-
+import { useParams } from 'react-router'
 
 function Applicants() {
   const { id } = useParams()
   const [applicants, setApplicants] = useState([])
-  const [jobTitle, setJobTitle] = useState('')
 
   //1. GET THE SAVED LOGIN TOKEN 
   //2. SEND GET REQUEST TO THE BACKEND
@@ -18,10 +15,7 @@ function Applicants() {
   async function getApplicants(){
     try{
       const token = localStorage.getItem('token')
-      const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/jobs/${id}/applicants`,
-        { headers: {Authorization: `Bearer ${token}` } }
-      )
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/jobs/${id}/applicants`, { headers: {Authorization: `Bearer ${token}` } })
       setApplicants(res.data)
     }
     catch(err){
@@ -35,11 +29,11 @@ function Applicants() {
   },[])
 
 
-  async function handleStatusChange(applicantionId, newStatus) {
+  async function handleStatusChange(applicationId, newStatus) {
     try{
       const token = localStorage.getItem('token')
       await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/applications/${applicantionId}/status`,
+        `${import.meta.env.VITE_BACKEND_URL}/applications/${applicationId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -49,7 +43,7 @@ function Applicants() {
       // change only the status of it 
 
       setApplicants(applicants.map(app =>
-        app._id === applicantionId ? {...app, status: newStatus } : app
+        app._id === applicationId ? {...app, status: newStatus } : app
       ))
     }
     catch(err){
@@ -78,10 +72,9 @@ function Applicants() {
 
           <p className='match-score'>{app.matchScore}% match</p>
           <p>Cover note: {app.coverNote || 'None'}</p>
-          <label htmlFor="status">Status</label>
-          // shows current status and when we change it will call handleStatusChange function with the new status and the application id
+          <label htmlFor={`status-${app._id}`}>Status</label>
           
-          <select value={app.status} onChange={e => handleStatusChange(app._id, e.target.value)}>
+          <select value={app.status} id={`status-${app._id}`} onChange={e => handleStatusChange(app._id, e.target.value)}>
 
             <option value="Applied">Applied</option>
             <option value="Reviewing">Reviewing</option>

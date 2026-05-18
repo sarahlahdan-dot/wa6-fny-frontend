@@ -24,7 +24,7 @@ function Profile({user}) {
     setFormData({
       bio: res.data.bio || '',
       location: res.data.location || '',
-      companyName: res.data.companyName || '',
+      company: res.data.company || '',
       skills: res.data.skills || []
     })
 
@@ -69,15 +69,15 @@ function Profile({user}) {
       <form onSubmit={handleSubmit}>
 
         <label htmlFor="bio">Bio:</label>
-        <input name="bio" value={formData.bio} onChange={handleChange} />
+        <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..." />
 
         <label htmlFor="location">Location:</label>
         <input name="location" value={formData.location} onChange={handleChange} />
 
         {user.role === 'employer' && (
           <>
-            <label htmlFor="companyName">Company Name:</label>
-            <input name="companyName" value={formData.companyName} onChange={handleChange} />
+            <label htmlFor="company">Company Name:</label>
+            <input name="company" value={formData.company} onChange={handleChange} />
 
           </>
         )}
@@ -85,6 +85,7 @@ function Profile({user}) {
         {user.role === 'seeker' && (
           <>
             <label>Your Skills:</label>
+            <p>Select the skills you are confident in.</p>
             <SkillPicker selectedSkills={formData.skills} onChange={handleSkillsChange}/>
           </>
         )}
