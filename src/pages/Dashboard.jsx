@@ -49,6 +49,19 @@ function Dashboard({ user }) {
             <h3>{job.title}</h3>
             <p>{job.company} . {job.location} . {job.jobType}</p>
             <p>{job.isOpen ? 'open' : 'closed'}</p>
+            <div>
+              // The skills required section is conditionally rendered. If there are skills required, it maps over them and displays each skill in a span with the class 'skill-tag'. If there are no specific skills required, it displays a message saying so.
+              <strong>Skills Required:</strong>
+              {job.skillsRequired?.length > 0 ? (
+                <div>
+                  {job.skillsRequired.map(skill => (
+                    <span key={skill} className='skill-tag'>{skill}</span>
+                  ))}
+                </div>
+              ) : (
+                <p>No specific skills required</p>
+              )}
+            </div>
 
             <Link to={`/jobs/${job._id}/applicants`}>View Applicants</Link>
             <Link to={`/jobs/${job._id}/edit`}>Edit</Link>
