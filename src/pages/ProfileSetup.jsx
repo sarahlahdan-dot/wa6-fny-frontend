@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router'
 import SkillPicker from '../components/SkillPicker'
 
-function ProfileSetup({ user }) {
+function ProfileSetup({ user, setUser }) {
 
   const navigate = useNavigate()
 
@@ -27,6 +27,9 @@ function ProfileSetup({ user }) {
     try {
       const token = localStorage.getItem('token')
       await axios.put( `${import.meta.env.VITE_BACKEND_URL}/users/profile`,formData, { headers: { Authorization: `Bearer ${token}` } })
+
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/profile`, { headers: { Authorization: `Bearer ${token}` } } )
+      setUser(res.data)
 
       if (user.role === 'seeker') navigate('/jobs')
       else navigate('/dashboard')

@@ -26,11 +26,12 @@ function SignIn({ setUser }) {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`, formData);
       const token = response.data.token;
+      localStorage.setItem('token', token);
 
       const userInfo = JSON.parse(atob(token.split('.')[1])).payload;
-      setUser(userInfo);
-      localStorage.setItem('token', token);
-      
+      console.log('userInfo:', userInfo)  // ADD THIS
+console.log('profileComplete:', userInfo.profileComplete)  // ADD THIS
+      setUser(userInfo)
       if (!userInfo.profileComplete) {
         navigate('/profile/setup')
       } 
@@ -41,6 +42,7 @@ function SignIn({ setUser }) {
         navigate('/jobs')
       }
       
+
     } 
     catch (err) {
       setErrorMessage(err.response?.data?.err || 'An error occurred during sign in');
