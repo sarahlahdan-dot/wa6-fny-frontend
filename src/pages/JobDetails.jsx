@@ -48,6 +48,19 @@ function JobDetails({ user }) {
       <p>{job.company} · {job.location} · {job.jobType}</p>
       <p>{job.description}</p>
 
+      <div>
+        <h3>Skills Required:</h3>
+        {job.skillsRequired?.length > 0 ? (
+          <div>
+            {job.skillsRequired.map(skill => (
+              <span key={skill} className='skill-tag'>{skill}</span>
+            ))}
+          </div>
+        ) : (
+          <p>No specific skills required</p>
+        )}
+      </div>
+
       {job.matchScore !== undefined && (
         <>
           <h3>Your Match: {job.matchScore}%</h3>
