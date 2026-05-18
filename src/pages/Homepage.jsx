@@ -1,7 +1,14 @@
 import { useNavigate } from "react-router"
+import { useEffect } from 'react'
 
 function Homepage({user}) {
   const navigate = useNavigate()
+  useEffect(() => {
+    if (!user) return
+    if (!user.profileComplete) navigate('/profile/setup')
+    else if (user.role === 'employer') navigate('/dashboard')
+    else navigate('/jobs')
+  }, [user])
 
   return (
     <div className="homepage">

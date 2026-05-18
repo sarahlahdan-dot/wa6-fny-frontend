@@ -21,7 +21,7 @@ function Signup() {
 
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-up`, formData);
-      navigate('/sign-in');
+      navigate('/sign-in')
     } catch (err) {
       console.log(err)
       setErrorMessage(

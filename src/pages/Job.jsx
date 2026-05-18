@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router'
 import JobCard from '../components/JobCard'
 
-function Job() {
+function Job({ user }) {
   const [jobs, setJobs] = useState([])
+  const navigate = useNavigate()
 
   async function getAllJobs() {
     try {
@@ -18,6 +20,10 @@ function Job() {
   }
 
   useEffect(() => {
+    if (!user.profileComplete) {
+      navigate('/profile/setup')
+      return
+    }
     getAllJobs()
   }, [])
 
