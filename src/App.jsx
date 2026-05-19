@@ -12,6 +12,7 @@ import JobDetail from './pages/JobDetails';
 import JobForm from './pages/JobForm';
 import Applications from './pages/Applications';
 import Applicants from './pages/Applicants';
+import './App.css'
 
 function App() {
   const [user, setUser] = useState(null);

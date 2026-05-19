@@ -68,14 +68,14 @@ function Profile({user}) {
       <h1>Edit your Profile</h1>
       <form onSubmit={handleSubmit}>
 
-        <label htmlFor="bio">Bio:</label>
-        <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..." />
-
         <label htmlFor="location">Location:</label>
         <input name="location" value={formData.location} onChange={handleChange} />
 
         {user.role === 'employer' && (
           <>
+            <label htmlFor="bio">Bio: </label>
+            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell us about company..." />
+
             <label htmlFor="company">Company Name:</label>
             <input name="company" value={formData.company} onChange={handleChange} />
 
@@ -84,6 +84,9 @@ function Profile({user}) {
 
         {user.role === 'seeker' && (
           <>
+            <label htmlFor="bio">Personal Statement: </label>
+            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..." />
+
             <label>Your Skills:</label>
             <p>Select the skills you are confident in.</p>
             <SkillPicker selectedSkills={formData.skills} onChange={handleSkillsChange}/>
