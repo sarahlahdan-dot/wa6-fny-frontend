@@ -1,5 +1,5 @@
-import skills from '../constants/skills'
-
+import skillsByCategory from '../constants/skills'
+import { useState } from 'react'
 
 //1.Page loads → buttons render from skills
 //2.User clicks a button
@@ -11,6 +11,7 @@ import skills from '../constants/skills'
 //8.Button style updates automatically
 
 function SkillPicker({ selectedSkills, onChange }) {
+  const [openCategory, setOpenCategory] = useState('null')
 
     function toggleSkill(skill) {
         if (selectedSkills.includes(skill)) {
@@ -23,13 +24,50 @@ function SkillPicker({ selectedSkills, onChange }) {
         }
     }
 
+    function toggleCategory(category) {
+      setOpenCategory(openCategory === category ? 'null' : category)
+    }
+
   return (
     <div className='skill-picker'>
-      {skills.map(skill => (
-        // Each button gets a 'selected' class if its skill is in selectedSkills if not it gets the default 'skill-button' class.
-        <button key={skill} type='button' onClick={() => toggleSkill(skill)} className={selectedSkills.includes(skill) ? 'skill-button selected' : 'skill-button'}>
-          {skill}
-        </button>
+      {Object.entries(skillsByCategory).map(([category, skills]) => (
+        <div key={category} className='skill-category'>
+
+          {/* category header — click to expand/collapse */}
+          <button
+            type='button'
+            className='category-header'
+            onClick={() => toggleCategory(category)}
+          >
+            <span>{category}</span>
+            {/* show how many skills selected in this category */}
+            {skills.filter(s => selectedSkills.includes(s)).length > 0 && (
+              <span className='category-count'>
+                {skills.filter(s => selectedSkills.includes(s)).length} selected
+              </span>
+            )}
+            <span className='category-arrow'>
+              {openCategory === category ? '▲' : '▼'}
+            </span>
+          </button>
+
+          {/* skills — only show if category is open */}
+          {openCategory === category && (
+            <div className='skill-panel'>
+              {skills.map(skill => (
+                <button
+                  key={skill}
+                  type='button'
+                  onClick={() => toggleSkill(skill)}
+                  className={selectedSkills.includes(skill) ? 'skill-button selected' : 'skill-button'}
+                >
+                  {skill}
+                </button>
+              ))}
+            </div>
+          )}
+
+        </div>
       ))}
     </div>
   )
