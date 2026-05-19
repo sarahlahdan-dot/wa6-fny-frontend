@@ -29,8 +29,7 @@ function SignIn({ setUser }) {
       localStorage.setItem('token', token);
 
       const userInfo = JSON.parse(atob(token.split('.')[1])).payload;
-      console.log('userInfo:', userInfo)  // ADD THIS
-console.log('profileComplete:', userInfo.profileComplete)  // ADD THIS
+     
       setUser(userInfo)
       if (!userInfo.profileComplete) {
         navigate('/profile/setup')
