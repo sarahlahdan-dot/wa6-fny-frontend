@@ -30,6 +30,8 @@ function Applicants() {
 
 
   async function handleStatusChange(applicationId, newStatus) {
+    const confirmed = window.confirm(`Change the status of this applicant to "${newStatus}"?`)
+    if (!confirmed) return
     try{
       const token = localStorage.getItem('token')
       await axios.put(
@@ -54,7 +56,7 @@ function Applicants() {
 
 
   return (
-    <div>
+    <div className="applicants-page">
       <h1>Applicants</h1>
       <p>Ranked by best match</p>
 

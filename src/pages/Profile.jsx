@@ -64,23 +64,23 @@ function Profile({user}) {
   }
 
   return (
-    <div>
+    <div className="profile-page">
       <h1>Edit your Profile</h1>
       <form onSubmit={handleSubmit}>
 
-        <label htmlFor="location">Location:</label>
-        <input name="location" value={formData.location} onChange={handleChange} />
-
+      
         {user.role === 'employer' && (
           <>
-            <label htmlFor="bio">Bio: </label>
-            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell us about company..." />
-
             <label htmlFor="company">Company Name:</label>
             <input name="company" value={formData.company} onChange={handleChange} />
 
+            <label htmlFor="bio">Bio: </label>
+            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell us about company..." />
+
           </>
         )}
+        <label htmlFor="location">Location:</label>
+        <input name="location" value={formData.location} onChange={handleChange} />
 
         {user.role === 'seeker' && (
           <>

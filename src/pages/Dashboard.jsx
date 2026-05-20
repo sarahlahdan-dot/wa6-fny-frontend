@@ -41,7 +41,7 @@ function Dashboard({ user }) {
     }
   }
   return (
-    <div>
+    <div className="dashboard-page">
         <h1>My Job Postings</h1>
         <button onClick={() => navigate('/jobs/new')}>Post a new Job</button>
         {jobs.map(job => (
@@ -62,15 +62,16 @@ function Dashboard({ user }) {
                 <p>No specific skills required</p>
               )}
             </div>
-
-            <Link to={`/jobs/${job._id}/applicants`}>View Applicants</Link>
-            <Link to={`/jobs/${job._id}/edit`}>Edit</Link>
-            <button onClick={() => { 
-              const confirmed = window.confirm('Delete this job posting?')
-              if (confirmed) {
-                handleDelete(job._id)
-              }
-            }}>Delete</button>
+            <div className="row-actions">
+              <Link to={`/jobs/${job._id}/applicants`}>View Applicants</Link>
+              <Link to={`/jobs/${job._id}/edit`}>Edit</Link>
+              <button onClick={() => { 
+                const confirmed = window.confirm('Delete this job posting?')
+                if (confirmed) {
+                  handleDelete(job._id)
+                }
+              }}>Delete</button>
+            </div>
 
           </div>
         ))}

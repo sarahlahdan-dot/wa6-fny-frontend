@@ -50,10 +50,10 @@ console.log('profileComplete:', userInfo.profileComplete)  // ADD THIS
   };
 
   return (
-    <div>
+    <div className="auth-page">
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             id="username"
@@ -64,7 +64,7 @@ console.log('profileComplete:', userInfo.profileComplete)  // ADD THIS
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             id="password"

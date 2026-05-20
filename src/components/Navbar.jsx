@@ -12,7 +12,7 @@ function Navbar({ user, setUser }) {
   return (
     <nav>
       {/* Routes seen by everyone */}
-      <Link className='nav-item' to='/'>Wa6'fny</Link>
+      <Link className='nav-item' to='/'><img src='/logo.png' alt="Wa6'fny" className='nav-logo' /> </Link>
 
       {user ? (
         <>

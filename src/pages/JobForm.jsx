@@ -84,15 +84,12 @@ function JobForm() {
   }
 
   return (
-    <div>
+    <div className="job-form-page">
       <h1>{id ? 'Edit The Job' : 'Post a New Job'}</h1>
       <form onSubmit={handleSubmit}>
 
         <label htmlFor="title">Job Title:</label>
         <input name='title' value={formData.title} onChange={handleChange} />
-
-        <label htmlFor="company">Company:</label>
-        <input name='company' value={formData.company} onChange={handleChange} />
 
         <label htmlFor="description">Description</label>
         <textarea name="description" value={formData.description} onChange={handleChange}/>

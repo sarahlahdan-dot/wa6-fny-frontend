@@ -12,7 +12,7 @@ function Homepage({user}) {
 
   return (
     <div className="homepage">
-      <h1>وظفني · Wa6'fny</h1>
+      <img src="/logo.png" alt="Wa6'fny Logo" className="homepage-logo" />
       <p className="tagline">  Bahrain 's AI-powered platform matching job seekers with the right opportunities.</p>
       <p className='homepage-description'> Built specifically for Bahrain 's job market to help seekers and employers connect more efficiently.</p>
       {user ? (
@@ -28,9 +28,10 @@ function Homepage({user}) {
         </>
       ) : (
         <>
+        <div className="homepage-actions">
           <button onClick={() => navigate('/sign-up')}>Get started</button>
           <button onClick={() => navigate('/sign-in')}>Sign In</button>
-
+        </div>
         </>
       )}
     </div>
