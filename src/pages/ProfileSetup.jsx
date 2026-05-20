@@ -40,25 +40,29 @@ function ProfileSetup({ user, setUser }) {
   }
 
   return (
-    <div>
+    <div className="profile-setup-page">
       <h1>Set Up Your Profile</h1>
+      <div >
       <form onSubmit={handleSubmit}>
-
-        <label htmlFor='bio'>Bio:</label>
-        <textarea name='bio' value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..."/>
-
-        <label htmlFor='location'>Location:</label>
-        <input name='location' value={formData.location} onChange={handleChange} />
 
         {user.role === 'employer' && (
           <>
             <label htmlFor='company'>Company Name:</label>
             <input name='company' value={formData.company} onChange={handleChange} />
+
+            <label htmlFor="bio">Bio: </label>
+            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell us about company..." />
+
           </>
         )}
+        <label htmlFor='location'>Location:</label>
+        <input name='location' value={formData.location} onChange={handleChange} />
 
         {user.role === 'seeker' && (
           <>
+            <label htmlFor="bio">Personal Statement: </label>
+            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell employers about yourself..." />
+
             <label>Your Skills:</label>
             <p>Select the skills you are confident in.</p>
             <SkillPicker selectedSkills={formData.skills} onChange={handleSkillsChange} />
@@ -67,6 +71,7 @@ function ProfileSetup({ user, setUser }) {
 
         <button type='submit'>Save & Continue</button>
       </form>
+      </div>
     </div>
   )
 }

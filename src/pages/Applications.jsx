@@ -43,7 +43,7 @@ function Applications() {
     }
   
   return (
-    <div>
+    <div className="applications-page">
       <h1>My Applications</h1>
       {applications.length === 0
         ? <p>You haven't applied to any jobs yet.</p>

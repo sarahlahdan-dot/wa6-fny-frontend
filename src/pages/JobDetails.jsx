@@ -43,11 +43,16 @@ function JobDetails({ user }) {
   if (!job) return <h2>Loading...</h2>
 
   return (
-    <div>
+    <div className="job-detail-page">
+      <div className="job-detail-card"> 
       <h1>{job.title}</h1>
       <p>{job.company} · {job.location} · {job.jobType}</p>
       <p>{job.description}</p>
-
+      {!job.isOpen && (
+        <div className="closed-notice">
+          <p>This position is closed and not accepting new applications.</p>
+        </div>
+      )}
       <div>
         <h3>Skills Required:</h3>
         {job.skillsRequired?.length > 0 ? (
@@ -64,13 +69,13 @@ function JobDetails({ user }) {
       {job.matchScore !== undefined && (
         <>
           <h3>Your Match: {job.matchScore}%</h3>
-          <div>
+          <div className="skill-section">
             <h4>Skills you have:</h4>
             {job.matchedSkills?.map(skill => (
               <span key={skill} className='skill-tag matched'>{skill}</span>
             ))}
           </div>
-          <div>
+          <div className="skill-section">
             <h4>Skills you're missing:</h4>
             {job.missingSkills?.length > 0
               ? job.missingSkills.map(skill => (
@@ -83,8 +88,10 @@ function JobDetails({ user }) {
       )}
    
       {user.role === 'seeker' && (
-        job.alreadyApplied ? (
+        job.applyAlready ? (
           <p>You already applied to this job.</p>
+        ) : !job.isOpen ? (
+          <p>This job is no longer accepting applications.</p>
         ) : (
           <form onSubmit={handleApply}>
             <label htmlFor='coverNote'>Cover Note:</label>
@@ -98,6 +105,7 @@ function JobDetails({ user }) {
           </form>
         )
       )}
+      </div> 
     </div>
   )
 }

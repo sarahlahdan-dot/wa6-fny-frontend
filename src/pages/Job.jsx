@@ -28,7 +28,7 @@ function Job({ user }) {
   }, [])
 
   return (
-    <div>
+    <div className="jobs-page">
       <h1>Your Best Job Matches</h1>
       {jobs.map(job => (
         <JobCard key={job._id} job={job} />
